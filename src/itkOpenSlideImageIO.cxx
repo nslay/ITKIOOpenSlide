@@ -139,7 +139,7 @@ public:
     }
   }
 
-  // Checks weather a slide file is currently opened
+  // Checks whether a slide file is currently opened
   bool IsOpened() const {
     return m_Osr != NULL;
   }
@@ -721,11 +721,11 @@ OpenSlideImageIO::GenerateStreamableReadRegionFromRequestedRegion( const ImageIO
   if (!m_OpenSlideWrapper->AlignReadRegion(i64X, i64Y, i64Width, i64Height))
     return requested;
 
-  clStart[0] = (SizeValueType)i64X;
-  clStart[1] = (SizeValueType)i64Y;
+  clStart[0] = (ImageIORegion::IndexValueType)i64X;
+  clStart[1] = (ImageIORegion::IndexValueType)i64Y;
 
-  clSize[0] = (SizeValueType)i64Width;
-  clSize[1] = (SizeValueType)i64Height;
+  clSize[0] = (ImageIORegion::SizeValueType)i64Width;
+  clSize[1] = (ImageIORegion::SizeValueType)i64Height;
 
   ImageIORegion clNewRegion(requested);
 
@@ -845,8 +845,8 @@ ImageIORegion OpenSlideImageIO::GetMinimumStreamableRegion() const {
     return ImageIORegion();
 
   // XXX: Could overflow
-  clSize[0] = (SizeValueType)i64Width;
-  clSize[1] = (SizeValueType)i64Height;
+  clSize[0] = (ImageIORegion::SizeValueType)i64Width;
+  clSize[1] = (ImageIORegion::SizeValueType)i64Height;
 
   clRegion.SetIndex(clIndex);
   clRegion.SetSize(clSize);
@@ -860,7 +860,7 @@ void OpenSlideImageIO::SetApproximateStreaming(bool bApproximateStreaming) {
     m_OpenSlideWrapper->SetApproximateStreaming(bApproximateStreaming);
 }
 
-/** Returns weather approximate streaming is enabled or not. */
+/** Returns whether approximate streaming is enabled or not. */
 bool OpenSlideImageIO::GetApproximateStreaming() const {
   return m_OpenSlideWrapper != NULL && m_OpenSlideWrapper->GetApproximateStreaming();
 }
